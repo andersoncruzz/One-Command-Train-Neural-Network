@@ -16,26 +16,7 @@ import threading
 import time
 
 class ConvolutionalNeuralNetwork:
-    '''
-    SIZE_WIDTH = 78
-    SIZE_HEIGHT = 63
-    DIMENSION = 1
-    input_shape = (SIZE_WIDTH, SIZE_HEIGHT, DIMENSION)
-    batch_size = 8
-    num_classes = 2
-    epochs = 20'''
     thread_flag = 0
-    #x_train = x_train.astype('float32')
-    #x_test = x_test.astype('float32')
-    #x_train /= 255
-    #x_test /= 255
-    #print('x_train shape:', x_train.shape)
-    #print(x_train.shape[0], 'train samples')
-    #print(x_test.shape[0], 'test samples')
-
-    # convert class vectors to binary class matrices
-    #y_train = keras.utils.to_categorical(y_train, num_classes)
-    #y_test = keras.utils.to_categorical(y_test, num_classes)
 
     def clear_files(self, path_dir, num_models = 5, delay_thread=5):
         while self.thread_flag != 2:

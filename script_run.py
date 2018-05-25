@@ -2,7 +2,7 @@ from cnn import ConvolutionalNeuralNetwork
 from preProcessing_module import PreProcessing
 
 PATH = '/home/anderson/gitoyota/poc_toyota/tire_model_recognition/CV/base_train'
-SIZE_IMAGE = (223, 143)
+SIZE_IMAGE = (113, 123)
 DIMENSION = 3
 
 pre = PreProcessing()
@@ -15,4 +15,4 @@ VALIDATION_SPLIT = 0.75
 
 net = ConvolutionalNeuralNetwork()
 net.train(images=images, labels=labels, output_models = OUTPUT_MODELS, name_model = NAME_MODEL, clazzes = clazzes,
-          validation_split = VALIDATION_SPLIT, size_image = SIZE_IMAGE, dimension = DIMENSION)
+          validation_split = VALIDATION_SPLIT, size_image = SIZE_IMAGE, dimension = DIMENSION, batch_size=4, epochs = 10)
