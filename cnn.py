@@ -18,13 +18,30 @@ import time
 class ConvolutionalNeuralNetwork:
     thread_flag = 0
 
+    def getValue(self, element):
+        #print("element: ", element)
+        aux = element.replace("weights.", "").split("-")
+        return int(aux[0])
+
+    def listSort(self, vec):
+        for index in range(1,len(vec)):
+            currentvalue = vec[index]
+            position = index
+
+            while position>0 and self.getValue(vec[position-1]) > self.getValue(currentvalue):
+                vec[position] = vec[position-1]
+                position = position-1
+
+            vec[position] = currentvalue
+        return vec
+
     def clear_files(self, path_dir, num_models = 5, delay_thread=5):
         while self.thread_flag != 2:
             files = listdir(path_dir)
-            print("files: ", files)
+            print("\nfiles: ", files)
             if len(files) > num_models:
                 #print("files: ", files)
-                files = sorted(files)
+                files = self.listSort(files)
                 print("\nfiles_sort: ", files)
                 remove_files = files[0:len(files) - num_models]
                 print("\nremove_files: ", remove_files)
@@ -37,7 +54,7 @@ class ConvolutionalNeuralNetwork:
 
     def remove_files(self, path_dir, remove_files):
         for remove_file in remove_files:
-            print ("path: ", path.join(path_dir, remove_file))
+            print ("\npath: ", path.join(path_dir, remove_file))
             remove(path.join(path_dir, remove_file))
 
     def build_network (self, input_shape, num_classes):
@@ -83,13 +100,13 @@ class ConvolutionalNeuralNetwork:
                   validation_split = validation_split)
 
         self.thread_flag = 1
-        print("Thread Status: ", t.is_alive())
+        print("\nThread Status: ", t.is_alive())
         while t.is_alive():
             pass
 
-        print("Thread Status: ", t.is_alive())
+        print("\nThread Status: ", t.is_alive())
 
     def evaluation (self, data_test, labels_test):
         score = model.evaluate(data_test, labels_test, verbose=0)
-        print('Test loss:', score[0])
-        print('Test accuracy:', score[1])
+        print('\nTest loss:', score[0])
+        print('\nTest accuracy:', score[1])
