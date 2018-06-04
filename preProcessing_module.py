@@ -74,10 +74,13 @@ class PreProcessing:
         print (len(labels))
         print (names)
 
-        np.save('/tmp/images.npy', images)
-        np.save('/tmp/labels.npy', labels)
-
-        images = np.load('/tmp/images.npy')
-        labels = np.load('/tmp/labels.npy')
-
+        #np.save('/tmp/images.npy', images)
+        #np.save('/tmp/labels.npy', labels)
+        #del images
+        #del labels
+        #images = np.load('/tmp/images.npy')
+        #labels = np.load('/tmp/labels.npy')
+        images = np.asarray(images)
+        labels = np.asarray(labels)
         return images, labels, clazzes
+        #return [],[], clazzes
