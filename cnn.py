@@ -8,7 +8,7 @@ from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
-from keras.callbacks import ModelCheckpoint
+from keras.callbacks import ModelCheckpoint, EarlyStopping
 from keras import backend as K
 from os import path, listdir, remove
 from dataset_loader import DatasetLoader
@@ -86,7 +86,9 @@ class ConvolutionalNeuralNetwork:
 
         filepath = path.join(output_models, "weights.{epoch:02d}-{val_loss:.2f}.hdf5")
         checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
-        callbacks_list = [checkpoint]
+        earlystopping = EarlyStopping(monitor='loss', min_delta=0.01, patience=6, verbose=0, mode='auto')
+
+        callbacks_list = [checkpoint, earlystopping]
 
         t = threading.Thread(target=self.clear_files, args=(output_models,))
         t.start()
